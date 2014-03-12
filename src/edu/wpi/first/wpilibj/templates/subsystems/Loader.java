@@ -16,12 +16,17 @@ import team.util.CANJaguar3574;
  * @author team3574
  */
 public class Loader extends Subsystem {
-	public static final double START = .830;
-	public static final double LOAD = START - .229;
-	public static final double CARRY = START - .512;
-	public static final double PICKUP = START - .632;
-	protected static final double SHOOTSAFE = START - .277;
-	
+        public static final double PAST_LIMIT = 1.5;
+        public static final double LIMIT = 0;
+	public static final double START = -0.059;
+	public static final double LOAD = -0.347;
+	public static final double SHOOTSAFE = -0.386;	
+	public static final double CARRY = -0.552;
+	public static final double PICKUP = -0.709;
+        
+       private double limitPosition = 1;
+               
+              
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
@@ -54,16 +59,26 @@ public class Loader extends Subsystem {
 	}
     }
     
-    public void setSetpoint (double setpoint) {
+    public void setPosition (double positionName) {
 	//todo: add offset from a value check on startup
 	try {
 	    //todo:  why????
-	    loaderJag.setX(setpoint);
+	    loaderJag.setX(limitPosition-positionName);
 	} catch (Exception e) {
 	    System.out.println("DX - Exception! - Loader Set Point");
 	    e.printStackTrace();
 	    System.out.println(e.getClass().toString());
+        
 	}
+        
+        
+    }
+    public void calibrateTo (double positionName) {
+        try {
+            this.limitPosition = loaderJag.getPosition() - positionName;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
     
