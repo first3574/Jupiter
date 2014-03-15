@@ -7,6 +7,7 @@ package edu.wpi.first.wpilibj.templates.commands.Catapult;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.templates.RobotMap;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
+import edu.wpi.first.wpilibj.templates.subsystems.Loader;
 
 /**
  *
@@ -27,6 +28,7 @@ public class Shoot extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
+	theLoader.setOffsetSetpoint(Loader.SHOOTSAFE_OFFSET);
 	theCatapult.PinRelease();
 	time.reset();
 	time.start();

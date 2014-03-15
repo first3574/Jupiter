@@ -21,7 +21,7 @@ public class StartPosition extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	theLoader.setPosition(Loader.START);
+	theLoader.setOffsetSetpoint(Loader.START_OFFSET);
 
     }
 

@@ -22,7 +22,7 @@ public class AutonomousShootRightTimeDriveForward extends CommandGroupBetterBase
     
     protected void initialize() {
 	/* How Parallel and Sequential Works:
-	 * 
+	 * Sequential goes in order, Parallel Goes with Above
 	 */
 	addSequential(new WaitForTimeToShoot());
 	addParallel(new Shoot());

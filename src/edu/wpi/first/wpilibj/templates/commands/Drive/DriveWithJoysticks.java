@@ -39,7 +39,7 @@ public class DriveWithJoysticks extends CommandBase {
 	System.out.println("Right : " + oi.rightUpAndDown()+ " -- " + rightSpeed);
 	SmartDashboard.putNumber("debug\\rightSpeed", rightSpeed);
 	
-	theDrive.goVariable(leftSpeed,rightSpeed);
+	theDrive.goVariable(-leftSpeed,-rightSpeed);
     }
 
     // Make this return true when this Command no longer needs to run execute()

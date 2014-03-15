@@ -25,8 +25,8 @@ public class RobotMap {
     public static CANJaguar3574 rightFrontMotor;
     public static CANJaguar3574 rightBackMotor;
     public static CANJaguar loaderJag;
-    public static Encoder leftEncoder = new Encoder(11 , 10, 9, false);
-    public static Encoder rightEncoder = new Encoder(14, 13, 12, false);
+    public static Encoder leftEncoder = new Encoder(11 , 10, true);
+    public static Encoder rightEncoder = new Encoder(14, 13, false);
     public static DigitalInput catapultLimitSwich = new DigitalInput(8);
     //public static ADXL345_I2C accel = new ADXL345_I2C(1, ADXL345_I2C.DataFormat_Range.k2G);
     public static Compressor airCompressor = new Compressor(5, 1);
@@ -36,9 +36,9 @@ public class RobotMap {
     public static AnalogChannel distancer = new AnalogChannel(3);
     
     //TODO
-    public static SolenoidDoubleActing pin = new SolenoidDoubleActing(1, 2);
-    public static SolenoidDoubleActing tensionHigh = new SolenoidDoubleActing(3, 4);
-    public static SolenoidDoubleActing tensionLow  = new SolenoidDoubleActing(5, 6);
+    public static SolenoidDoubleActing pin = new SolenoidDoubleActing(1, 2, true);
+    public static SolenoidDoubleActing tensionHigh = new SolenoidDoubleActing(3, 4, true);
+    public static SolenoidDoubleActing tensionLow  = new SolenoidDoubleActing(5, 6, true);
    
 
     static {

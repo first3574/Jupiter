@@ -8,15 +8,22 @@ import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionHigh;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionLow;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionMedium;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.Shoot;
+import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateLoaderToLimit;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CarryPosition;
+import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualUp;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoadPosition;
+import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualDown;
+import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualStay;
 import edu.wpi.first.wpilibj.templates.commands.Loader.PickUpPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.StartPosition;
 import edu.wpi.first.wpilibj.templates.commands.PrintCommandButton;
 import edu.wpi.first.wpilibj.templates.commands.ShiftGear1;
 import edu.wpi.first.wpilibj.templates.commands.ShiftGear2;
 import edu.wpi.first.wpilibj.templates.subsystems.PrintSystem;
+import team.util.JoystickTrigger;
 import team.util.XboxController;
+import team.util.joystick.Axis;
+import team.util.joystick.AxisSide;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -35,7 +42,9 @@ public class OI {
     Button btnRightStickClick = new JoystickButton(stickOne, XboxController.RightStickClick);
     Button btnStart = new JoystickButton(stickOne,XboxController.Start);
     Button btnSelect = new JoystickButton(stickOne, XboxController.Select);
-
+    Button btnDPLeft = new JoystickTrigger(stickOne, Axis.dPadHorizontal, AxisSide.left);
+    Button btnDPRight = new JoystickTrigger(stickOne, Axis.dPadHorizontal, AxisSide.right);
+    
     public OI() {
 	System.out.print("Oi constructor!");
 	btnA.whenPressed(new Shoot());
@@ -43,15 +52,20 @@ public class OI {
 	btnY.whenPressed(new CarryPosition());
 	btnB.whenPressed(new LoadPosition());
 	btnStart.whenPressed(new StartPosition());
+	btnSelect.whenPressed(new CalibrateLoaderToLimit());
+
 	btnRB.whenPressed(new ShiftGear2());
 	btnLB.whenPressed(new ShiftGear1());
-	btnRightStickClick.whenPressed(new TensionHigh());
-	btnLeftStickClick.whenPressed(new TensionLow());
-	btnSelect.whenPressed(new TensionMedium());
 	
+//	btnRightStickClick.whenPressed(new TensionHigh());
+//	btnLeftStickClick.whenPressed(new TensionLow());
 	
+
+	btnDPLeft.whenPressed(new LoaderManualDown());
+	btnDPLeft.whenReleased(new LoaderManualStay());
 	
-	
+	btnDPRight.whenPressed(new LoaderManualUp());	
+	btnDPRight.whenReleased(new LoaderManualStay());	
     }
 
     public double leftUpAndDown() {

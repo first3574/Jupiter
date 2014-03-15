@@ -16,21 +16,22 @@ import team.util.CANJaguar3574;
  * @author team3574
  */
 public class Loader extends Subsystem {
-        public static final double PAST_LIMIT = 1.5;
-        public static final double LIMIT = 0;
-	public static final double START = -0.059;
-	public static final double LOAD = -0.347;
-	public static final double SHOOTSAFE = -0.386;	
-	public static final double CARRY = -0.552;
-	public static final double PICKUP = -0.709;
-        
-       private double limitPosition = 1;
-               
-              
+    //offsets
+    public static final double TOP_LIMIT_OFFSET = 0.059;
+    public static final double START_OFFSET = 0.0;
+    public static final double LOAD_OFFSET = -0.249;
+    public static final double SHOOTSAFE_OFFSET = -0.3;
+    public static final double CARRY_OFFSET = -0.454;
+    public static final double PICKUP_OFFSET = -0.611;
+	
+    
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     
-    CANJaguar loaderJag = RobotMap.loaderJag;
+    // setting it to original value
+    double StartPosition = .763;
+    
+    public CANJaguar loaderJag = RobotMap.loaderJag;
     AnalogChannel distancer = RobotMap.distancer;
 
     public void initDefaultCommand() {
@@ -41,7 +42,7 @@ public class Loader extends Subsystem {
     public Loader() {
 	try {
 	    loaderJag.setPID(-1000.0, -0.0, -0.0);
-	    loaderJag.enableControl();
+//	    loaderJag.enableControl();
 	    loaderJag.setPositionReference(CANJaguar.PositionReference.kPotentiometer);
 	    loaderJag.configPotentiometerTurns(1);
 	} catch (Exception e) {
@@ -59,36 +60,56 @@ public class Loader extends Subsystem {
 	}
     }
     
-    public void setPosition (double positionName) {
+    public void setOffsetSetpoint (double setpointConstantOffset) {
 	//todo: add offset from a value check on startup
+	this.setSetpoint(this.StartPosition + setpointConstantOffset);
+	
+    }
+    
+    public void setSetpoint (double setpoint) {
 	try {
-	    //todo:  why????
-	    loaderJag.setX(limitPosition-positionName);
+//	    loaderJag.setX(setpoint);
+	    loaderJag.enableControl();
+	    loaderJag.setX(setpoint);
+	    
 	} catch (Exception e) {
 	    System.out.println("DX - Exception! - Loader Set Point");
 	    e.printStackTrace();
 	    System.out.println(e.getClass().toString());
-        
 	}
-        
-        
-    }
-    public void calibrateTo (double positionName) {
-        try {
-            this.limitPosition = loaderJag.getPosition() - positionName;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
     
+    public double getSetpoint() {
+	try {
+	   return loaderJag.getX();	    
+	} catch (Exception e) {
+	    e.printStackTrace();
+	    return -2;
+	}
+    }
     
+    public void CalibrateCurrentToLimitPosition() {
+	try {
+	    this.StartPosition = loaderJag.getPosition() - Loader.TOP_LIMIT_OFFSET;	    
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
+
+    public void CalibrateCurrentToStartPosition() {
+	try {
+	    this.StartPosition = loaderJag.getPosition();	    
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+    }
 
     public void updateStatus() {
 	try {
-	    SmartDashboard.putNumber("debug\\L getX", loaderJag.getX());
+	    SmartDashboard.putNumber("debug\\L setpoint", loaderJag.getX());
 	    SmartDashboard.putNumber("debug\\L position", loaderJag.getPosition());
-	    SmartDashboard.putBoolean("debug\\L forward limit", loaderJag.getForwardLimitOK());
-	    SmartDashboard.putBoolean("debug\\L reverse limit", loaderJag.getReverseLimitOK());
+	    SmartDashboard.putBoolean("debug\\L bottom limit", loaderJag.getForwardLimitOK());
+	    SmartDashboard.putBoolean("debug\\L top limit", loaderJag.getReverseLimitOK());
 	    SmartDashboard.putNumber("debug\\distancer", distancer.getVoltage());
 	}
 	catch(Exception e){

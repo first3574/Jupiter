@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.templates.subsystems.Loader;
  * @author team3574
  */
 public class CarryPosition extends CommandBase {
-    
+        
     public CarryPosition() {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
@@ -21,7 +21,7 @@ public class CarryPosition extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	theLoader.setPosition(Loader.CARRY);
+	theLoader.setOffsetSetpoint(Loader.CARRY_OFFSET);
     }
 
     // Called repeatedly when this Command is scheduled to run

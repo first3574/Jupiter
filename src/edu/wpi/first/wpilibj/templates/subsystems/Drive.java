@@ -26,11 +26,11 @@ public class Drive extends Subsystem {
 	super("Drive");
 	
 	System.out.println("Drive Constructed");
-	leftEncoder.setDistancePerPulse(0.052);
-	leftEncoder.setSamplesToAverage(5);
+//	leftEncoder.setDistancePerPulse(0.052);
+//	leftEncoder.setSamplesToAverage(5);
 	leftEncoder.start();
-	rightEncoder.setDistancePerPulse(0.052);
-	rightEncoder.setSamplesToAverage(5);
+//	rightEncoder.setDistancePerPulse(0.052);
+//	rightEncoder.setSamplesToAverage(5);
 	rightEncoder.start();
 	
 	LiveWindow.addSensor("Drive", "Left ENCODER ", leftEncoder);
@@ -49,16 +49,23 @@ public class Drive extends Subsystem {
 
     public void updateStatus() {
 	SmartDashboard.putNumber("debug\\Right encoder", rightEncoder.get());
-	SmartDashboard.putNumber("debug\\Right encoder Rate", rightEncoder.getRate());
+//	SmartDashboard.putNumber("debug\\Right encoder Rate", rightEncoder.getRate());
 	SmartDashboard.putNumber("debug\\Left encoder", leftEncoder.get());
-	SmartDashboard.putNumber("debug\\Left encoder Rate", leftEncoder.getRate());
+//	SmartDashboard.putNumber("debug\\Left encoder Rate", leftEncoder.getRate());
     }
 
     public void goVariable(double leftSpeed, double rightSpeed) {
-	RobotMap.leftBackMotor.setX(leftSpeed);
-	RobotMap.leftFrontMotor.setX(leftSpeed);
-	RobotMap.rightBackMotor.setX(-rightSpeed);
-	RobotMap.rightFrontMotor.setX(-rightSpeed);
+	RobotMap.leftBackMotor.setX(-leftSpeed);
+	RobotMap.leftFrontMotor.setX(-leftSpeed);
+	RobotMap.rightBackMotor.setX(rightSpeed);
+	RobotMap.rightFrontMotor.setX(rightSpeed);
 
+    }
+   
+    public void reset() {
+	rightEncoder.reset();
+	leftEncoder.reset();
+	rightEncoder.start();
+	leftEncoder.start();
     }
 }

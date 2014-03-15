@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.templates.commands.Autonomous.AutonomousShootDriveForward;
 import edu.wpi.first.wpilibj.templates.commands.Drive.DriveForMeasurement;
 import edu.wpi.first.wpilibj.templates.commands.Drive.DriveFromDashboard;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
@@ -34,7 +35,7 @@ public class RobotTemplate extends IterativeRobot {
      */
     public void robotInit() {
 	// instantiate the command used for the autonomous period
-	autonomousCommand = new DriveFromDashboard();
+	autonomousCommand = new AutonomousShootDriveForward();
 	
 	// Initialize all subsystems
 	CommandBase.init();

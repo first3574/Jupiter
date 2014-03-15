@@ -22,7 +22,7 @@ public class LoadPosition extends CommandBase {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	theLoader.setPosition(Loader.LOAD);
+	theLoader.setOffsetSetpoint(Loader.LOAD_OFFSET);
 
     }
 
