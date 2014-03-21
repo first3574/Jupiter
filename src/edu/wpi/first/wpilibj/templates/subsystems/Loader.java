@@ -6,6 +6,7 @@ package edu.wpi.first.wpilibj.templates.subsystems;
 
 import edu.wpi.first.wpilibj.AnalogChannel;
 import edu.wpi.first.wpilibj.CANJaguar;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.templates.RobotMap;
@@ -16,23 +17,33 @@ import team.util.CANJaguar3574;
  * @author team3574
  */
 public class Loader extends Subsystem {
-    //offsets
-    public static final double TOP_LIMIT_OFFSET = 0.059;
+////    //offsets-production robot
+//    public static final double TOP_LIMIT_OFFSET = 0.059;
+//    public static final double START_OFFSET = 0.0;
+//    public static final double LOAD_OFFSET = -0.249;
+//    public static final double SHOOTSAFE_OFFSET = -0.3;
+//    public static final double CARRY_OFFSET = -0.454;
+//    public static final double PICKUP_OFFSET = -0.611
+    // setting it to original value
+//    double StartPosition = .763;
+    
+    public static final double TOP_LIMIT_OFFSET = 0.04;
     public static final double START_OFFSET = 0.0;
-    public static final double LOAD_OFFSET = -0.249;
-    public static final double SHOOTSAFE_OFFSET = -0.3;
-    public static final double CARRY_OFFSET = -0.454;
-    public static final double PICKUP_OFFSET = -0.611;
+    public static final double LOAD_OFFSET = -0.17;
+    public static final double SHOOTSAFE_OFFSET = -0.24;
+    public static final double CARRY_OFFSET = -0.3;
+    public static final double PICKUP_OFFSET = -0.5;
+    public static final double AUTONOMOUSLOAD_OFFSET = -.12;
+    // setting it to original value
+    double StartPosition = .92;
 	
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
-    
-    // setting it to original value
-    double StartPosition = .763;
-    
     public CANJaguar loaderJag = RobotMap.loaderJag;
     AnalogChannel distancer = RobotMap.distancer;
+    DigitalInput ballDetectorLeft = RobotMap.ballDetectorLeft;
+    DigitalInput ballDetectorRight = RobotMap.ballDetectorRight;
 
     public void initDefaultCommand() {
 	// Set the default command for a subsystem here.
@@ -86,6 +97,14 @@ public class Loader extends Subsystem {
 	    e.printStackTrace();
 	    return -2;
 	}
+    }
+    
+    public boolean getBallSensorLeft(){
+	return ballDetectorLeft.get();
+    }
+    
+    public boolean getBallSensorRight(){
+	return ballDetectorRight.get();
     }
     
     public void CalibrateCurrentToLimitPosition() {

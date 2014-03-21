@@ -54,8 +54,8 @@ public class OI {
 	btnStart.whenPressed(new StartPosition());
 	btnSelect.whenPressed(new CalibrateLoaderToLimit());
 
-	btnRB.whenPressed(new ShiftGear2());
-	btnLB.whenPressed(new ShiftGear1());
+//	btnRB.whenPressed(new ShiftGear2());
+//	btnLB.whenPressed(new ShiftGear1());
 	
 //	btnRightStickClick.whenPressed(new TensionHigh());
 //	btnLeftStickClick.whenPressed(new TensionLow());
