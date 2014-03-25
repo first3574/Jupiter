@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionHigh;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionLow;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionMedium;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.Shoot;
+import edu.wpi.first.wpilibj.templates.commands.Loader.AutoLift;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateLoaderToLimit;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CarryPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualUp;
@@ -44,6 +45,10 @@ public class OI {
     Button btnSelect = new JoystickButton(stickOne, XboxController.Select);
     Button btnDPLeft = new JoystickTrigger(stickOne, Axis.dPadHorizontal, AxisSide.left);
     Button btnDPRight = new JoystickTrigger(stickOne, Axis.dPadHorizontal, AxisSide.right);
+    Button btnRT = new JoystickTrigger(stickOne, Axis.triggers, AxisSide.right);
+    
+    public Joystick stickTwo = new Joystick(2);
+    Button btnTwoA = new JoystickButton(stickTwo, XboxController.A);
     
     public OI() {
 	System.out.print("Oi constructor!");
@@ -53,9 +58,10 @@ public class OI {
 	btnB.whenPressed(new LoadPosition());
 	btnStart.whenPressed(new StartPosition());
 	btnSelect.whenPressed(new CalibrateLoaderToLimit());
-
-//	btnRB.whenPressed(new ShiftGear2());
-//	btnLB.whenPressed(new ShiftGear1());
+	btnRT.whenPressed(new Shoot());
+	
+	btnRB.whenPressed(new ShiftGear2());
+	btnLB.whenPressed(new ShiftGear1());
 	
 //	btnRightStickClick.whenPressed(new TensionHigh());
 //	btnLeftStickClick.whenPressed(new TensionLow());
@@ -65,7 +71,10 @@ public class OI {
 	btnDPLeft.whenReleased(new LoaderManualStay());
 	
 	btnDPRight.whenPressed(new LoaderManualUp());	
-	btnDPRight.whenReleased(new LoaderManualStay());	
+	btnDPRight.whenReleased(new LoaderManualStay());
+		
+	// number 2 controller
+	btnTwoA.whileHeld(new AutoLift());
     }
 
     public double leftUpAndDown() {

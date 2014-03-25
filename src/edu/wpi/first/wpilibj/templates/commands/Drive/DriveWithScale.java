@@ -2,43 +2,38 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package edu.wpi.first.wpilibj.templates.commands;
+package edu.wpi.first.wpilibj.templates.commands.Drive;
 
-import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 
 /**
  *
  * @author team3574
  */
-public class WaitForTimeToShoot extends CommandBase {
-    Timer time = new Timer();
-    boolean isFinsh;
+public class DriveWithScale extends CommandBase {
+    double beginspeed;
+    double endspeed;
+    double ticks;
     
-    public WaitForTimeToShoot() {
+    public DriveWithScale(double beginspeed,double endspeed,double ticks) {
 	// Use requires() here to declare subsystem dependencies
-	// eg. requires(chassis);
+	requires(theDrive);
+	this.beginspeed = beginspeed;
+	this.endspeed = endspeed;
+	this.ticks = ticks;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-	time.reset();
-	time.start();
-	isFinsh = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-	if (theCameraFeedback.timeToShoot() || time.get() > 4.0) {
-	    isFinsh = true;
-	   // TODO: Make this fail safe
-	} else {
-	   
-	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-	return isFinsh;
+	return false;
     }
 
     // Called once after isFinished returns true

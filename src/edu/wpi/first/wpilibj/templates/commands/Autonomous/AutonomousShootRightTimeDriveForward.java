@@ -24,9 +24,9 @@ public class AutonomousShootRightTimeDriveForward extends CommandGroupBetterBase
 	/* How Parallel and Sequential Works:
 	 * Sequential goes in order, Parallel Goes with Above
 	 */
-	addSequential(new WaitForTimeToShoot());
+	addRunUntillDone(new WaitForTimeToShoot());
 	addParallel(new Shoot());
-	addSequential(new Wait(1.5));
+	addRunUntillDone(new Wait(1.5));
 	addParallel(new DriveForMeasurement(0.5, 0.5, 100, 100));
 
 	

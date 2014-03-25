@@ -32,7 +32,7 @@ public class Loader extends Subsystem {
     public static final double LOAD_OFFSET = -0.17;
     public static final double SHOOTSAFE_OFFSET = -0.24;
     public static final double CARRY_OFFSET = -0.3;
-    public static final double PICKUP_OFFSET = -0.5;
+    public static final double PICKUP_OFFSET = -0.475;
     public static final double AUTONOMOUSLOAD_OFFSET = -.12;
     // setting it to original value
     double StartPosition = .92;
@@ -44,6 +44,7 @@ public class Loader extends Subsystem {
     AnalogChannel distancer = RobotMap.distancer;
     DigitalInput ballDetectorLeft = RobotMap.ballDetectorLeft;
     DigitalInput ballDetectorRight = RobotMap.ballDetectorRight;
+    DigitalInput ballDetectorCenter = RobotMap.ballDetectorCenter;
 
     public void initDefaultCommand() {
 	// Set the default command for a subsystem here.
@@ -107,6 +108,10 @@ public class Loader extends Subsystem {
 	return ballDetectorRight.get();
     }
     
+    public boolean getBallSensorCenter() {
+	return ballDetectorCenter.get();
+    }
+    
     public void CalibrateCurrentToLimitPosition() {
 	try {
 	    this.StartPosition = loaderJag.getPosition() - Loader.TOP_LIMIT_OFFSET;	    
@@ -123,6 +128,15 @@ public class Loader extends Subsystem {
 	}
     }
 
+    public double getPosition() {
+	try {
+	    return loaderJag.getPosition();
+	} catch (Exception e) {
+	    e.printStackTrace();
+	}
+	return 0;
+    }
+
     public void updateStatus() {
 	try {
 	    SmartDashboard.putNumber("debug\\L setpoint", loaderJag.getX());
@@ -130,6 +144,9 @@ public class Loader extends Subsystem {
 	    SmartDashboard.putBoolean("debug\\L bottom limit", loaderJag.getForwardLimitOK());
 	    SmartDashboard.putBoolean("debug\\L top limit", loaderJag.getReverseLimitOK());
 	    SmartDashboard.putNumber("debug\\distancer", distancer.getVoltage());
+	    SmartDashboard.putBoolean("debug\\L ball Detector Left", ballDetectorLeft.get());
+	    SmartDashboard.putBoolean("debug\\L ball Detector Right", ballDetectorRight.get());
+	    SmartDashboard.putBoolean("debug\\L ball Detector Center", ballDetectorCenter.get());
 	}
 	catch(Exception e){
 	    System.out.println("DX - Exception! - Loader Status Update");

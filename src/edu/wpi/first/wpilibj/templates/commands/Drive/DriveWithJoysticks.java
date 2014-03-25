@@ -31,12 +31,10 @@ public class DriveWithJoysticks extends CommandBase {
     protected void execute() {
 	//double leftSpeed = oi.leftUpAndDown();
 	double leftSpeed = motorScalerLeft.scale(oi.leftUpAndDown() * fullSpeed);
-	System.out.println("Left :  " + oi.leftUpAndDown() + " -- " + leftSpeed);
 	SmartDashboard.putNumber("debug\\leftSpeed", leftSpeed);
 	
 	//double rightSpeed = oi.rightUpAndDown();
 	double rightSpeed = motorScalerRight.scale(oi.rightUpAndDown() * fullSpeed);
-	System.out.println("Right : " + oi.rightUpAndDown()+ " -- " + rightSpeed);
 	SmartDashboard.putNumber("debug\\rightSpeed", rightSpeed);
 	
 	theDrive.goVariable(-leftSpeed,-rightSpeed);

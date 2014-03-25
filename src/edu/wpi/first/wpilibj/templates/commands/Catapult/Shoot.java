@@ -29,7 +29,7 @@ public class Shoot extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
 	theLoader.setOffsetSetpoint(Loader.SHOOTSAFE_OFFSET);
-	theCatapult.PinRelease();
+        theCatapult.PinRelease();
 	time.reset();
 	time.start();
 	state = 0;
@@ -39,32 +39,40 @@ public class Shoot extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 	switch (state) {
-	    case 0:
-		if (time.get() >= 1) {
-		    theCatapult.tensionRelease();
+	    case 0: 
+		if (theLoader.getPosition() < Loader.SHOOTSAFE_OFFSET + .05) { //using a hardcoded number to allow for PID sloppiness
+		    time.reset();		    
 		    state++;
 		}
 		break;
 	    case 1:
+		if (time.get() >= .15) {
+		    theCatapult.tensionRelease();
+		    state++;
+		}
+		break;
+	    case 2:
 		if (RobotMap.catapultLimitSwich.get() == true) {
 		    time.reset();
 		    state++;
 		    //todo: make sure the timer starts again
 		}
 		break;
-	    case 2:
-		if (time.get() >= 2 && RobotMap.catapultLimitSwich.get() == true) {
+	    case 3:
+		if (!RobotMap.catapultLimitSwich.get()) {
+		    time.reset();
+		} else if(time.get() >= .25) {
 		    theCatapult.pinHold();
 		    state++;
 		    time.reset();
 		}
 		break;
-	    case 3:
-		if (time.get() >= .5) {
+	    case 4:
+		if (time.get() >= .25) {
 		    state++;
 		}
 		break;
-	    case 4:
+	    case 5:
 		theCatapult.ApplyTension();
 		isFinsh = true;
 		break;

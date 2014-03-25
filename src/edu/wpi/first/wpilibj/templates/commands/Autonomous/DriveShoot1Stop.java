@@ -8,6 +8,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.Shoot;
 import edu.wpi.first.wpilibj.templates.commands.CommandGroupBetterBase;
 import edu.wpi.first.wpilibj.templates.commands.Drive.DriveForMeasurement;
+import edu.wpi.first.wpilibj.templates.commands.Loader.AutonomousLoadPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateCurrentAsStartPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CarryPosition;
 import edu.wpi.first.wpilibj.templates.commands.Wait;
@@ -16,27 +17,17 @@ import edu.wpi.first.wpilibj.templates.commands.Wait;
  *
  * @author team3574
  */
-public class AutonomousOregonCityWorking extends CommandGroupBetterBase {
-
-    protected void initialize(){
+public class DriveShoot1Stop extends CommandGroupBetterBase {
+    
+    public DriveShoot1Stop() {
 	addRunUntillDone(new CalibrateCurrentAsStartPosition());
-	addRunUntillDone(new Wait(.2));
-	addRunUntillDone(new CarryPosition());
-	addRunUntillDone(new Wait(2.0));
-//	addSequential(new Wait(3));
-//	int distance =(int)( DriverStation.getInstance().getAnalogIn(1) * 1000);
-//	addSequential(new DriveForMeasurement(0.5, 0.5, 816, 816)); // 872
-	addRunUntillDone(new DriveForMeasurement(.75, .75, 750, 750)); //650 ,1
-//	addParallel(new CarryPosition());
-	addRunUntillDone(new Wait(1.0));
+	addRunUntillDone(new Wait(.1));
+	addRunUntillDone(new AutonomousLoadPosition());
+	addRunUntillDone(new Wait(.25));
+	addRunUntillDone(new DriveForMeasurement(1, 1, 500, 500)); 
+	addParallel(new CarryPosition());
+	addRunUntillDone(new Wait(0.15));
 	addParallel(new Shoot());
-	addRunUntillDone(new Wait(1.5));
-//	Encoder 100 per rotation
-//	Robot moves 19in per rotation
-    }
-	    
-
-    public AutonomousOregonCityWorking() {	
 	// Add Commands here:
 	// e.g. addSequential(new Command1());
 	//      addSequential(new Command2());
@@ -53,5 +44,8 @@ public class AutonomousOregonCityWorking extends CommandGroupBetterBase {
 	// e.g. if Command1 requires chassis, and Command2 requires arm,
 	// a CommandGroup containing them would require both the chassis and the
 	// arm.
+    }
+
+    protected void initialize() {
     }
 }

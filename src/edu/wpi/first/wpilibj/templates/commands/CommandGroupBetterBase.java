@@ -108,19 +108,19 @@ public abstract class CommandGroupBetterBase extends CommandBase {
 	this.m_commands.addElement(new CommandEntry(command, CommandEntry.TYPE_RUN_NOW, 1, timeout));
     }
 
-    protected void addSequential(Command command) {
+    protected void addRunUntillDone(Command command) {
 	this.m_commands.addElement(new CommandEntry(command, CommandEntry.TYPE_RUN_UNTIL_DONE, 1));
     }
 
-    protected void addSequential(Command command, double timeout) {
+    protected void addRunUntillDone(Command command, double timeout) {
 	this.m_commands.addElement(new CommandEntry(command, CommandEntry.TYPE_RUN_UNTIL_DONE, 1, timeout));
     }
 
-    protected void addSequentialGroup(Command command, int countInGroup) {
+    protected void addRunUntillGroupIsDone(Command command, int countInGroup) {
 	this.m_commands.addElement(new CommandEntry(command, CommandEntry.TYPE_GROUP_UNTIL_DONE, countInGroup));
     }
 
-    protected void addSequentialGroup(Command command, int countInGroup, double timeout) {
+    protected void addRunUntillGroupIsDone(Command command, int countInGroup, double timeout) {
 	this.m_commands.addElement(new CommandEntry(command, CommandEntry.TYPE_GROUP_UNTIL_DONE, countInGroup, timeout));
     }
 

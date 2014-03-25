@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.templates.commands.CommandBase;
  *
  * @author team3574
  */
-public class DriveForMeasurement extends CommandBase {
+public class DriveForMeasurementNegative extends CommandBase {
 
     double lSpeed = 0.0;
     double rSpeed = 0.0;
@@ -20,15 +20,15 @@ public class DriveForMeasurement extends CommandBase {
     int xRight = 0;
     boolean done = false;
 
-    public DriveForMeasurement(double lSpeed, double rSpeed, int xLeft, int XRight) {
+    public DriveForMeasurementNegative(double lSpeed, double rSpeed, int xLeft, int XRight) {
 	// Use requires() here to declare subsystem dependencies
 	// eg. requires(chassis);
 	//TODO: left and right count reset
 	requires(theDrive);
+	this.originalLeftSpeed = lSpeed;
+	this.originalRightSpeed = rSpeed;
 	this.lSpeed = lSpeed;
 	this.rSpeed = rSpeed;
-	originalRightSpeed = rSpeed;
-	originalLeftSpeed = lSpeed;
 	this.xLeft = xLeft;
 	this.xRight = XRight;
     }
@@ -42,17 +42,16 @@ public class DriveForMeasurement extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
 	theDrive.goVariable(lSpeed, rSpeed);
-	if (RobotMap.rightEncoder.get() >= xRight) {
+	if (RobotMap.rightEncoder.get() <= xRight) {
 	    rSpeed = 0;
-	}else if(RobotMap.rightEncoder.get() >= xRight - 200) {
-	    rSpeed = ((xRight - RobotMap.rightEncoder.get())/200) * ((xRight - RobotMap.rightEncoder.get())/200) * originalRightSpeed;
+	} else if (RobotMap.rightEncoder.get() <= xRight + 200) {
+	    rSpeed = ((xRight - RobotMap.rightEncoder.get()) / 200) * -originalRightSpeed;
 	}
 	
-	if (RobotMap.leftEncoder.get() >= xLeft) {
+	if (RobotMap.leftEncoder.get() <= xLeft) {
 	    lSpeed = 0;
-	}else if (RobotMap.leftEncoder.get() >= xLeft - 200) {
-	    lSpeed = ((xLeft - RobotMap.leftEncoder.get())/200) * ((xLeft - RobotMap.leftEncoder.get())/200) * originalLeftSpeed;
-	    System.out.println("drive slow down");
+	} else if (RobotMap.leftEncoder.get() <= xLeft + 200) {
+	    lSpeed = ((xLeft - RobotMap.leftEncoder.get()) / 200) * -originalLeftSpeed;
 	}
 	if ((rSpeed == 0 && lSpeed == 0)) {
 	    theDrive.goVariable(lSpeed, rSpeed);

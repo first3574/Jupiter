@@ -25,8 +25,9 @@ public class RobotMap {
     public static CANJaguar3574 rightFrontMotor;
     public static CANJaguar3574 rightBackMotor;
     public static CANJaguar loaderJag;
-    public static DigitalInput ballDetectorRight = new DigitalInput (1);
+    public static DigitalInput ballDetectorRight = new DigitalInput (3);
     public static DigitalInput ballDetectorLeft = new DigitalInput (2);
+    public static DigitalInput ballDetectorCenter = new DigitalInput(1);
     public static Encoder leftEncoder = new Encoder(11 , 10, true);
     public static Encoder rightEncoder = new Encoder(14, 13, false);
     public static DigitalInput catapultLimitSwich = new DigitalInput(8);

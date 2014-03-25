@@ -25,7 +25,6 @@ public class Drive extends Subsystem {
     public Drive() {
 	super("Drive");
 	
-	System.out.println("Drive Constructed");
 //	leftEncoder.setDistancePerPulse(0.052);
 //	leftEncoder.setSamplesToAverage(5);
 	leftEncoder.start();
