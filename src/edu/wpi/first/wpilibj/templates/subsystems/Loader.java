@@ -136,6 +136,10 @@ public class Loader extends Subsystem {
 	}
 	return 0;
     }
+    
+    public double getOffsetAsAPositionValue (double offsetValue) {
+	return StartPosition + offsetValue;
+    }
 
     public void updateStatus() {
 	try {

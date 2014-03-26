@@ -22,6 +22,7 @@ public class Catapult extends Subsystem {
     
     boolean stateOfTensionMore;
     boolean stateOfTensionLess;
+    boolean isLoaderArmBroke = false;
 
     public Catapult() {
 	this.pinHold();
@@ -56,7 +57,14 @@ public class Catapult extends Subsystem {
 	tensionLow.set(stateOfTensionLess);
     }
     
+    public void shootOverrideBecauseArmBroke(boolean state) {
+	this.isLoaderArmBroke = state;
+    }
     
+    public boolean getIfTheLoaderArmBroke() {
+	return isLoaderArmBroke;
+    }
+	    
     public void updateStatus() {
 	SmartDashboard.putBoolean("debug\\LimitSwitchState", RobotMap.catapultLimitSwich.get());
 	

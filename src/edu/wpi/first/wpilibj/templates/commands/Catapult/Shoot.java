@@ -29,19 +29,22 @@ public class Shoot extends CommandBase {
     // Called just before this Command runs the first time
     protected void initialize() {
 	theLoader.setOffsetSetpoint(Loader.SHOOTSAFE_OFFSET);
-        theCatapult.PinRelease();
 	time.reset();
 	time.start();
 	state = 0;
+
 	isFinsh = false;
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+	System.out.println(state);
 	switch (state) {
-	    case 0: 
-		if (theLoader.getPosition() < Loader.SHOOTSAFE_OFFSET + .05) { //using a hardcoded number to allow for PID sloppiness
-		    time.reset();		    
+	    case 0:
+		if (theLoader.getPosition() < theLoader.getOffsetAsAPositionValue(Loader.SHOOTSAFE_OFFSET) + .05
+			|| theCatapult.getIfTheLoaderArmBroke()) { //using a hardcoded number to allow for PID sloppiness
+		    theCatapult.PinRelease();
+		    time.reset();
 		    state++;
 		}
 		break;
@@ -61,7 +64,7 @@ public class Shoot extends CommandBase {
 	    case 3:
 		if (!RobotMap.catapultLimitSwich.get()) {
 		    time.reset();
-		} else if(time.get() >= .25) {
+		} else if (time.get() >= .25) {
 		    theCatapult.pinHold();
 		    state++;
 		    time.reset();
@@ -77,7 +80,6 @@ public class Shoot extends CommandBase {
 		isFinsh = true;
 		break;
 	}
-	System.out.println(state);
     }
 
     // Make this return true when this Command no longer needs to run execute()
