@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionMedium;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.Shoot;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.UpdateLoaderArmBroke;
 import edu.wpi.first.wpilibj.templates.commands.Loader.AutoLift;
+import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateCurrentAsStartPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateLoaderToLimit;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CarryPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualUp;
@@ -51,6 +52,7 @@ public class OI {
     public Joystick stickTwo = new Joystick(2);
     Button btnTwoA = new JoystickButton(stickTwo, XboxController.A);
     Button btnTwoLB = new JoystickButton(stickTwo, XboxController.LB);
+    Button btnTwoSelect = new JoystickButton(stickTwo, XboxController.Select);
     
     public OI() {
 	System.out.print("Oi constructor!");
@@ -78,6 +80,7 @@ public class OI {
 	// number 2 controller
 	btnTwoA.whileHeld(new AutoLift());
 	btnTwoLB.whenPressed(new UpdateLoaderArmBroke());
+	btnTwoSelect.whenPressed(new CalibrateCurrentAsStartPosition());
     }
 
     public double leftUpAndDown() {

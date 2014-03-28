@@ -44,16 +44,16 @@ public class DriveForMeasurement extends CommandBase {
 	theDrive.goVariable(lSpeed, rSpeed);
 	if (RobotMap.rightEncoder.get() >= xRight) {
 	    rSpeed = 0;
-	}else if(RobotMap.rightEncoder.get() >= xRight - 200) {
+	}/*else if(RobotMap.rightEncoder.get() >= xRight - 200) {
 	    rSpeed = ((xRight - RobotMap.rightEncoder.get())/200) * ((xRight - RobotMap.rightEncoder.get())/200) * originalRightSpeed;
-	}
+	}*/
 	
 	if (RobotMap.leftEncoder.get() >= xLeft) {
 	    lSpeed = 0;
-	}else if (RobotMap.leftEncoder.get() >= xLeft - 200) {
+	}/*else if (RobotMap.leftEncoder.get() >= xLeft - 200) {
 	    lSpeed = ((xLeft - RobotMap.leftEncoder.get())/200) * ((xLeft - RobotMap.leftEncoder.get())/200) * originalLeftSpeed;
 	    System.out.println("drive slow down");
-	}
+	}*/
 	if ((rSpeed == 0 && lSpeed == 0)) {
 	    theDrive.goVariable(lSpeed, rSpeed);
 	    done = true;

@@ -49,7 +49,7 @@ public class Shoot extends CommandBase {
 		}
 		break;
 	    case 1:
-		if (time.get() >= .15) {
+		if (time.get() >= .40) {
 		    theCatapult.tensionRelease();
 		    state++;
 		}

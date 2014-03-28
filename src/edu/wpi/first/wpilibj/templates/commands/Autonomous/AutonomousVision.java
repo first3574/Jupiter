@@ -25,7 +25,8 @@ public class AutonomousVision extends CommandGroupBetterBase {
 	addRunUntillDone(new Wait(.1));
 	addRunUntillDone(new AutonomousLoadPosition());
 	addRunUntillDone(new Wait(.25));
-	addRunUntillDone(new DriveForMeasurement(1, 1, 532, 532)); //was 564 - too close, was 500 - too far
+	// when we got to arben it was 532
+	addRunUntillDone(new DriveForMeasurement(1, 1, 542, 542	)); 
 	addParallel(new CarryPosition());
 	addRunUntillDone(new WaitForTimeToShoot());
 	addRunUntillDone(new Shoot());

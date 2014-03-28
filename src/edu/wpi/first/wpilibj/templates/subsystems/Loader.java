@@ -35,7 +35,7 @@ public class Loader extends Subsystem {
     public static final double LOAD_OFFSET = -0.16;
     public static final double SHOOTSAFE_OFFSET = -0.29;
     public static final double CARRY_OFFSET = -0.47;
-    public static final double PICKUP_OFFSET = -0.58;
+    public static final double PICKUP_OFFSET = -0.59; // .33 alcter value
     public static final double AUTONOMOUSLOAD_OFFSET = -.12;
     // setting it to original value
     double StartPosition = .92;
