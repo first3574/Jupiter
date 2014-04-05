@@ -20,7 +20,7 @@ public class PastTopLimit extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	// We need the .1 to go past the top limit.
 	theLoader.setOffsetSetpoint(Loader.TOP_LIMIT_OFFSET+.1);
     }

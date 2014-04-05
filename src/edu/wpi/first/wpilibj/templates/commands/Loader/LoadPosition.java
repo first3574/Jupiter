@@ -21,7 +21,7 @@ public class LoadPosition extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	theLoader.setOffsetSetpoint(Loader.LOAD_OFFSET);
 
     }

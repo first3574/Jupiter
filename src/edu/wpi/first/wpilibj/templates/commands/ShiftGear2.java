@@ -17,7 +17,7 @@ public class ShiftGear2 extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	System.out.println("gear 2 init");
 	theShifter.gear2();
     }

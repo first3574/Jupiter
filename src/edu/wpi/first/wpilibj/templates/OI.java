@@ -90,6 +90,12 @@ public class OI {
     public double rightUpAndDown() {
 	return stickOne.getRawAxis(5); //5
     }
+    public boolean joystickTwoX(){
+	return stickTwo.getRawButton(XboxController.X);
+    }
+    public boolean joystickTwoY(){
+	return stickTwo.getRawButton(XboxController.Y);
+    }
     //// CREATING BUTTONS
     // One type of button is a joystick button which is any button on a joystick.
     // You create one by telling it which joystick it's on and which button

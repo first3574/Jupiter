@@ -22,7 +22,7 @@ public class CalibrateLoaderToLimit extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	this.isDone = false;
 	
 	theLoader.setSetpoint(1.5);

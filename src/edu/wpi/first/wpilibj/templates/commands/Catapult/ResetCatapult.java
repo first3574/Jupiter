@@ -10,15 +10,17 @@ import edu.wpi.first.wpilibj.templates.commands.CommandBase;
  *
  * @author team3574
  */
-public class ReastCatapult extends CommandBase {
+public class ResetCatapult extends CommandBase {
     
-    public ReastCatapult() {
+    public ResetCatapult() {
 	// Use requires() here to declare subsystem dependencies
-	// eg. requires(chassis);
+	requires(theCatapult);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	 
+	thePrintSystem.printWithTimestamp(getClass().getName());
+	theCatapult.tensionRelease();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -28,7 +30,7 @@ public class ReastCatapult extends CommandBase {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-	return false;
+	return true;
     }
 
     // Called once after isFinished returns true

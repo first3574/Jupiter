@@ -25,8 +25,9 @@ import edu.wpi.first.wpilibj.templates.commands.Wait;
  */
 public class AutonomousCurrentProject extends CommandGroupBetterBase {
     
-    protected void initialize() {
+    protected void initialize() { 	 
 
+	thePrintSystem.printWithTimestamp(getClass().getName());
 	addRunUntillDone(new CalibrateCurrentAsStartPosition());
 	addRunUntillDone(new Wait(.1));
 	addRunUntillDone(new AutonomousLoadPosition());

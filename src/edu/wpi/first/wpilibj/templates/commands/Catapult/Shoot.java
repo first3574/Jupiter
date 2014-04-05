@@ -27,7 +27,7 @@ public class Shoot extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	theLoader.setOffsetSetpoint(Loader.SHOOTSAFE_OFFSET);
 	time.reset();
 	time.start();

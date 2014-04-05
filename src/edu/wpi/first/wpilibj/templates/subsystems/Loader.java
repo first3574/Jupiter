@@ -18,7 +18,7 @@ import team.util.CANJaguar3574;
  */
 public class Loader extends Subsystem {
 //    double StartPosition = .763;
-   /* the value for test robot
+  //  the value for test robot
     public static final double TOP_LIMIT_OFFSET = 0.04;
     public static final double START_OFFSET = 0.0;
     public static final double LOAD_OFFSET = -0.17;
@@ -27,9 +27,10 @@ public class Loader extends Subsystem {
     public static final double PICKUP_OFFSET = -0.475;
     public static final double AUTONOMOUSLOAD_OFFSET = -.12;
     // setting it to original value
-    double StartPosition = .92;
-*/
+    public double StartPosition = .92;
+
     /// production 
+    /*
     public static final double TOP_LIMIT_OFFSET = 0.08;
     public static final double START_OFFSET = 0.0;
     public static final double LOAD_OFFSET = -0.16;
@@ -38,7 +39,8 @@ public class Loader extends Subsystem {
     public static final double PICKUP_OFFSET = -0.59; // .33 alcter value
     public static final double AUTONOMOUSLOAD_OFFSET = -.12;
     // setting it to original value
-    double StartPosition = .92;
+    public double StartPosition = .92;
+    */
     
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
@@ -60,7 +62,7 @@ public class Loader extends Subsystem {
 	    loaderJag.setPositionReference(CANJaguar.PositionReference.kPotentiometer);
 	    loaderJag.configPotentiometerTurns(1);
 	} catch (Exception e) {
-	    System.out.println("DX - Exception! - Loader PID Potentiometer");
+	    System.out.println("!~!Exception!~! - Loader PID Potentiometer");
 	    e.printStackTrace();
 	    System.out.println(e.getClass().toString());
 	}
@@ -68,7 +70,7 @@ public class Loader extends Subsystem {
 	    loaderJag.setX(0.0);
 	}
 	catch(Exception e){
-	    System.out.println("DX - Exception! - Loader Set 0.0");
+	    System.out.println("!~!Exception!~! - Loader Set 0.0");
 	    e.printStackTrace();
 	    System.out.println(e.getClass().toString());
 	}
@@ -87,7 +89,7 @@ public class Loader extends Subsystem {
 	    loaderJag.setX(setpoint);
 	    
 	} catch (Exception e) {
-	    System.out.println("DX - Exception! - Loader Set Point");
+	    System.out.println("!~!Exception!~! - Loader Set Point");
 	    e.printStackTrace();
 	    System.out.println(e.getClass().toString());
 	}
@@ -155,7 +157,7 @@ public class Loader extends Subsystem {
 	    SmartDashboard.putBoolean("debug\\L ball Detector Center", ballDetectorCenter.get());
 	}
 	catch(Exception e){
-	    System.out.println("DX - Exception! - Loader Status Update");
+	    System.out.println("!~!Exception!~! - Loader Status Update");
 	    e.printStackTrace();
 	    System.out.println(e.getClass().toString());
 	}

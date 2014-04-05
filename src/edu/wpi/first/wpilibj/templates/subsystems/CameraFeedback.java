@@ -17,14 +17,15 @@ public class CameraFeedback extends Subsystem {
     // here. Call these from Commands.
     
     NetworkTable client = NetworkTable.getTable("Vision");
+    public boolean isGoalHot = false;
      
-
     public void initDefaultCommand() {
 	// Set the default command for a subsystem here.
 	//setDefaultCommand(new MySpecialCommand());
     }
     public boolean timeToShoot() {
 	boolean verAndHorClose = client.getBoolean("Vertical_And_Horizontal_Close", false);
+	isGoalHot = verAndHorClose;
 //	System.out.println(verAndHorClose);
 	return verAndHorClose;
     }

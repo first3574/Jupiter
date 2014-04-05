@@ -20,10 +20,11 @@ import edu.wpi.first.wpilibj.templates.commands.WaitForTimeToShoot;
  */
 public class AutonomousShootRightTimeDriveForward extends CommandGroupBetterBase {
     
-    protected void initialize() {
+    protected void initialize() { 	 
 	/* How Parallel and Sequential Works:
 	 * Sequential goes in order, Parallel Goes with Above
 	 */
+	thePrintSystem.printWithTimestamp(getClass().getName());
 	addRunUntillDone(new WaitForTimeToShoot());
 	addParallel(new Shoot());
 	addRunUntillDone(new Wait(1.5));

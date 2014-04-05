@@ -21,7 +21,8 @@ import edu.wpi.first.wpilibj.templates.commands.Wait;
  */
 public class SemiAutoFull2Shots extends CommandGroupBetterBase {
     
-    protected void initialize() {
+    protected void initialize() { 	
+	thePrintSystem.printWithTimestamp(getClass().getName());
 	addRunUntillDone(new CalibrateCurrentAsStartPosition());
 	addRunUntillDone(new Wait(.2));
 	addRunUntillDone(new AutonomousLoadPosition());

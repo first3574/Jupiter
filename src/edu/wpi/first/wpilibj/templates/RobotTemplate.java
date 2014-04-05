@@ -18,6 +18,7 @@ import edu.wpi.first.wpilibj.templates.commands.Drive.DriveForMeasurement;
 import edu.wpi.first.wpilibj.templates.commands.Drive.DriveFromDashboard;
 import edu.wpi.first.wpilibj.templates.commands.CommandBase;
 import edu.wpi.first.wpilibj.templates.commands.ExampleCommand;
+import edu.wpi.first.wpilibj.templates.commands.RobotSelfCheck;
 import edu.wpi.first.wpilibj.templates.commands.ShiftGear2;
 
 /**
@@ -30,6 +31,7 @@ import edu.wpi.first.wpilibj.templates.commands.ShiftGear2;
 public class RobotTemplate extends IterativeRobot {
 
     Command autonomousCommand;
+    Command testCommand = new RobotSelfCheck();
 
     /**
      * This function is run when the robot is first started up and should be
@@ -38,11 +40,16 @@ public class RobotTemplate extends IterativeRobot {
     public void robotInit() {
 	// instantiate the command used for the autonomous period
 //	autonomousCommand = new DriveShoot1Stop();
-	autonomousCommand = new AutonomousVision();
 //	autonomousCommand = new AutonomousCurrentProject();
 	
 	// Initialize all subsystems
 	CommandBase.init();
+    }
+    
+    public void disabledInit() {
+	if (testCommand != null) {
+	    testCommand.cancel();
+	}
     }
 
     public void disabledPeriodic() {
@@ -51,6 +58,7 @@ public class RobotTemplate extends IterativeRobot {
 
     public void autonomousInit() {
 	// schedule the autonomous command (example)
+	autonomousCommand = new AutonomousVision();
 	autonomousCommand.start();
     }
 
@@ -68,7 +76,9 @@ public class RobotTemplate extends IterativeRobot {
 	// teleop starts running. If you want the autonomous to 
 	// continue until interrupted by another command, remove
 	// this line or comment it out.
-	autonomousCommand.cancel();
+	if (autonomousCommand != null){
+	    	autonomousCommand.cancel();
+	}
     }
 
     /**
@@ -79,12 +89,18 @@ public class RobotTemplate extends IterativeRobot {
 	this.updateStatus();
 	RobotMap.airCompressor.start();
     }
+    
+    public void testInit() {
+	testCommand = new RobotSelfCheck();
+	testCommand.start();
+    }
 
     /**
      * This function is called periodically during test mode
      */
     public void testPeriodic() {
-	LiveWindow.run();
+	Scheduler.getInstance().run();
+//	LiveWindow.run();
 	this.updateStatus();
     }
 

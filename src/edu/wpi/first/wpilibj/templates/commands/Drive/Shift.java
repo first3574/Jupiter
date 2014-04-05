@@ -20,7 +20,7 @@ public class Shift extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
+    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	if(theShifter.getGear()==2){
 	    theShifter.gear1();
 	} else{

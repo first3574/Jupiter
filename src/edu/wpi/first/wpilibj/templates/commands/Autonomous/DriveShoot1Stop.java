@@ -46,6 +46,8 @@ public class DriveShoot1Stop extends CommandGroupBetterBase {
 	// arm.
     }
 
-    protected void initialize() {
+    protected void initialize() { 	
+	thePrintSystem.printWithTimestamp(getClass().getName()); 
+	
     }
 }
