@@ -38,7 +38,7 @@ public class Shoot extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-	System.out.println(state);
+	thePrintSystem.printWithTimestamp(" " + state);
 	switch (state) {
 	    case 0:
 		if (theLoader.getPosition() < theLoader.getOffsetAsAPositionValue(Loader.SHOOTSAFE_OFFSET) + .05
@@ -64,6 +64,7 @@ public class Shoot extends CommandBase {
 	    case 3:
 		if (!RobotMap.catapultLimitSwich.get()) {
 		    time.reset();
+		    thePrintSystem.printWithTimestamp("limit switch open");
 		} else if (time.get() >= .25) {
 		    theCatapult.pinHold();
 		    state++;

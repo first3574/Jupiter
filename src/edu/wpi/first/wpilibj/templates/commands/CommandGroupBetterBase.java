@@ -45,14 +45,14 @@ public abstract class CommandGroupBetterBase extends CommandBase {
 	    CommandEntry ce = (CommandEntry) m_commands.elementAt(i);
 
 	    if (ce.status == CommandEntry.STATUS_STARTING) {
-		System.out.println("starting: " + i);
+		thePrintSystem.printWithTimestamp("starting: " + i);
 		ce.status++;
 	    }
 	    
 	    if (ce.status == CommandEntry.STATUS_NEW) {
 		Scheduler.getInstance().add(ce.command);
 		ce.status = CommandEntry.STATUS_STARTING;
-		System.out.println("new: " + i);
+		thePrintSystem.printWithTimestamp("new: " + i);
 	    }
 	    if (ce.status == CommandEntry.STATUS_RUNNING || ce.status == CommandEntry.STATUS_STARTING) {
 		if (ce.type == CommandEntry.TYPE_RUN_UNTIL_DONE) {
@@ -71,7 +71,7 @@ public abstract class CommandGroupBetterBase extends CommandBase {
 	    CommandEntry ce = (CommandEntry) m_commands.elementAt(i);
 	    if (ce.status == CommandEntry.STATUS_RUNNING) {
 		if (ce.isDone()) {
-		    System.out.println("done " + i);
+		    thePrintSystem.printWithTimestamp("done " + i);
 		    ce.status = CommandEntry.STATUS_DONE;
 		}
 	    }
@@ -93,7 +93,7 @@ public abstract class CommandGroupBetterBase extends CommandBase {
 	for (int i = 0; i < m_commands.size(); i++) {
 	    CommandEntry ce = (CommandEntry) m_commands.elementAt(i);
 	    if (ce.command.isRunning()) {
-		System.out.println("killed: " + i);
+		thePrintSystem.printWithTimestamp("killed: " + i);
 		ce.command.cancel();
 	    }
 	}

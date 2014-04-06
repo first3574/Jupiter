@@ -29,7 +29,7 @@ public class WaitForTimeToShoot extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-	if (theCameraFeedback.timeToShoot() || time.get() > 4.0) {
+	if (theCameraFeedback.timeToShoot() || time.get() > 3.5) {
 	    isFinsh = true;
 	   // TODO: Make this fail safe
 	} else {

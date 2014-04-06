@@ -21,13 +21,14 @@ public class Loader extends Subsystem {
   //  the value for test robot
     public static final double TOP_LIMIT_OFFSET = 0.04;
     public static final double START_OFFSET = 0.0;
-    public static final double LOAD_OFFSET = -0.17;
+    public static final double LOAD_OFFSET = -0.14;
     public static final double SHOOTSAFE_OFFSET = -0.24;
-    public static final double CARRY_OFFSET = -0.3;
-    public static final double PICKUP_OFFSET = -0.475;
+    public static final double CARRY_OFFSET = -0.35;
+    public static final double PICKUP_OFFSET = -0.5;  // was -0.475;
     public static final double AUTONOMOUSLOAD_OFFSET = -.12;
     // setting it to original value
     public double StartPosition = .92;
+    
 
     /// production 
     /*
@@ -42,6 +43,7 @@ public class Loader extends Subsystem {
     public double StartPosition = .92;
     */
     
+    public double LearnedLoadPosition = Loader.CARRY_OFFSET;
     // Put methods for controlling this subsystem
     // here. Call these from Commands.
     public CANJaguar loaderJag = RobotMap.loaderJag;

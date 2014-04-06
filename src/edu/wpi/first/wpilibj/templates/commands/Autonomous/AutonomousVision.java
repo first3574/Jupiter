@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.templates.commands.WaitForTimeToShoot;
 public class AutonomousVision extends CommandGroupBetterBase {
     
     public AutonomousVision() {
-	addRunUntillDone(new CheckIsGoalHot());
+//	addRunUntillDone(new CheckIsGoalHot());
 	addRunUntillDone(new CalibrateCurrentAsStartPosition());
 	addRunUntillDone(new Wait(.1));
 	addRunUntillDone(new AutonomousLoadPosition());

@@ -4,6 +4,7 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 import edu.wpi.first.wpilibj.buttons.DigitalIOButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import edu.wpi.first.wpilibj.templates.commands.Catapult.CatapultRemoveTension;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionHigh;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionLow;
 import edu.wpi.first.wpilibj.templates.commands.Catapult.TensionMedium;
@@ -13,12 +14,14 @@ import edu.wpi.first.wpilibj.templates.commands.Loader.AutoLift;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateCurrentAsStartPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CalibrateLoaderToLimit;
 import edu.wpi.first.wpilibj.templates.commands.Loader.CarryPosition;
+import edu.wpi.first.wpilibj.templates.commands.Loader.GoToLearnedPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualUp;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoadPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualDown;
 import edu.wpi.first.wpilibj.templates.commands.Loader.LoaderManualStay;
 import edu.wpi.first.wpilibj.templates.commands.Loader.PickUpPosition;
 import edu.wpi.first.wpilibj.templates.commands.Loader.StartPosition;
+import edu.wpi.first.wpilibj.templates.commands.Loader.StoreLearnedLoadPosition;
 import edu.wpi.first.wpilibj.templates.commands.PrintCommandButton;
 import edu.wpi.first.wpilibj.templates.commands.ShiftGear1;
 import edu.wpi.first.wpilibj.templates.commands.ShiftGear2;
@@ -53,10 +56,14 @@ public class OI {
     Button btnTwoA = new JoystickButton(stickTwo, XboxController.A);
     Button btnTwoLB = new JoystickButton(stickTwo, XboxController.LB);
     Button btnTwoSelect = new JoystickButton(stickTwo, XboxController.Select);
+    Button btnTwoStart = new JoystickButton(stickTwo, XboxController.Start);
+    Button btnTwoLT = new JoystickTrigger(stickTwo, Axis.triggers, AxisSide.left);
+    Button btnTwoX = new JoystickButton(stickTwo, XboxController.X);
+    
     
     public OI() {
 	System.out.print("Oi constructor!");
-	btnA.whenPressed(new Shoot());
+//	btnA.whenPressed(new Shoot());  now have trigger, disabled
 	btnX.whenPressed(new PickUpPosition());
 	btnY.whenPressed(new CarryPosition());
 	btnB.whenPressed(new LoadPosition());
@@ -81,6 +88,11 @@ public class OI {
 	btnTwoA.whileHeld(new AutoLift());
 	btnTwoLB.whenPressed(new UpdateLoaderArmBroke());
 	btnTwoSelect.whenPressed(new CalibrateCurrentAsStartPosition());
+	btnTwoLT.whenPressed(new StoreLearnedLoadPosition() );
+	btnTwoX.whenPressed(new GoToLearnedPosition());
+	btnTwoStart.whenPressed(new CatapultRemoveTension());
+
+	
     }
 
     public double leftUpAndDown() {

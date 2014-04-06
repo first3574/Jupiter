@@ -20,7 +20,8 @@ public class StartPosition extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() { 	thePrintSystem.printWithTimestamp(getClass().getName()); 
+    protected void initialize() { 	
+	thePrintSystem.printWithTimestamp(getClass().getName()); 
 	theLoader.setOffsetSetpoint(Loader.START_OFFSET);
 
     }
