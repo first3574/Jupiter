@@ -24,7 +24,7 @@ public class Loader extends Subsystem {
     public static final double LOAD_OFFSET = -0.14;
     public static final double SHOOTSAFE_OFFSET = -0.24;
     public static final double CARRY_OFFSET = -0.35;
-    public static final double PICKUP_OFFSET = -0.5;  // was -0.475;
+    public static final double PICKUP_OFFSET = -0.47;  // was -0.475;
     public static final double AUTONOMOUSLOAD_OFFSET = -.12;
     // setting it to original value
     public double StartPosition = .92;
@@ -128,6 +128,7 @@ public class Loader extends Subsystem {
 
     public void CalibrateCurrentToStartPosition() {
 	try {
+	    loaderJag.enableControl();
 	    this.StartPosition = loaderJag.getPosition();	    
 	} catch (Exception e) {
 	    e.printStackTrace();

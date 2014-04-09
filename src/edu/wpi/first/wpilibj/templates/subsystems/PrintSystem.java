@@ -18,7 +18,7 @@ public class PrintSystem extends Subsystem {
 
     public void initDefaultCommand() {
 	// Set the default command for a subsystem here.
-	setDefaultCommand(new PrintCommandDefault());
+	// setDefaultCommand(new PrintCommandDefault());
     }
 
     public void print(String stringToPrint) {

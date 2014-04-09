@@ -31,5 +31,6 @@ public class CameraFeedback extends Subsystem {
     }
     public void updateStatus() {
 	SmartDashboard.putBoolean("debug\\Time to Shoot!", timeToShoot());
+	//System.out.println("camera: " + timeToShoot());
     }
 }
